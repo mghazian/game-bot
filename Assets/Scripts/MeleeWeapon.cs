@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MeleeWeapon
+public class MeleeWeapon : Weapon
 {
+	private uint weapon;
+
 	public MeleeWeapon (uint damage) : base (damage)
 	{
-		// this is sparta
+		//
 	}
 
-	public void fire ()
+	public override void fire ()
 	{
 		// fuck
 	}

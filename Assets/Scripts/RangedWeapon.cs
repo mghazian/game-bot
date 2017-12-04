@@ -7,12 +7,12 @@ public class RangedWeapon : Weapon
 
 	public RangedWeapon (uint damage, uint weapon) : base (damage)
 	{
-		this.weapon = weapon;
+		//
 	}
 
-	public void fire ()
+	public override void fire ()
 	{
-
+		//
 	}
 }
 

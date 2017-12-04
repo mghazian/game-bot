@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon
+public abstract class Weapon
 {
-	private uint damage;
+	protected uint damage;
 
 	public Weapon (uint damage)
 	{
 		this.damage = damage;
 	}
 
-	abstract void fire ();
+	public abstract void fire ();
 }
 
