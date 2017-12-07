@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnSystem : MonoBehaviour {
 
 	private Vector2 mapOffset = new Vector2 (-10.0f, 0.0f);
+	private GameObject[] player = new GameObject[2];
 
 	void Start () {
 		
@@ -15,19 +16,18 @@ public class SpawnSystem : MonoBehaviour {
 	}
 		
 	public void spawnPlayers(int numPlayer, CharacterContainer[] pContainer, GameObject playerToBeSpawn){
-		GameObject player = Instantiate (playerToBeSpawn) as GameObject;
-		player.transform.SetParent (transform);
-		CharacterContainer c = player.GetComponent<CharacterContainer> ();
-		pContainer [numPlayer] = c;
-		placePlayer (player,numPlayer);
+		player[numPlayer] = Instantiate (playerToBeSpawn);
+		//player.transform.SetParent (transform);
+		//CharacterContainer c = player.GetComponent<CharacterContainer> ();
+		//c = pContainer [numPlayer];
+		placePlayer (numPlayer);
 	}
-		
 
-	private void placePlayer(GameObject cc, int numPlayer){
+	private void placePlayer(int numPlayer){
 		if (numPlayer == 0) {
-			cc.transform.position = mapOffset;
+			player[numPlayer].transform.position = mapOffset;
 		} else {
-			cc.transform.position = (mapOffset * -1);
+			player[numPlayer].transform.position = (mapOffset * -1)	;
 		}
 	}
 }
