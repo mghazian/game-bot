@@ -15,7 +15,7 @@ public class GameSystem : MonoBehaviour {
 	public bool gameIsOver = false;
 
 	private void Start(){
-		map = GameObject.Find ("map");
+		map = GameObject.Find ("ground");
 		generatePlayers ();
 	}
 
