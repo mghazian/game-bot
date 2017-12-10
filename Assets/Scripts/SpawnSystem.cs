@@ -2,32 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnSystem : MonoBehaviour {
-
-	private Vector2 mapOffset = new Vector2 (-10.0f, 0.0f);
-	private GameObject[] player = new GameObject[2];
-
-	void Start () {
+public class SpawnSystem
+{
+	private List <float> possibleOffset = new List<float> (new float[]{-10.0f, -5.0f, 0f, 5.0f, 10.0f});
+	private float lastXOffsetUsed = float.NaN;
 		
-	}
-
-	void Update () {
-		
-	}
-		
-	public void spawnPlayers(int numPlayer, CharacterContainer[] pContainer, GameObject playerToBeSpawn){
-		player[numPlayer] = Instantiate (playerToBeSpawn);
-		//player.transform.SetParent (transform);
-		//CharacterContainer c = player.GetComponent<CharacterContainer> ();
-		//c = pContainer [numPlayer];
-		placePlayer (numPlayer);
-	}
-
-	private void placePlayer(int numPlayer){
-		if (numPlayer == 0) {
-			player[numPlayer].transform.position = mapOffset;
-		} else {
-			player[numPlayer].transform.position = (mapOffset * -1)	;
+	public void SpawnPlayer (GameObject character, float xOffset = float.NaN)
+	{
+		if ( float.IsNaN (xOffset) )
+		{
+			do
+			{
+				xOffset = possibleOffset[Random.Range (0, possibleOffset.Count)];
+			} while (xOffset == lastXOffsetUsed);
 		}
+
+		lastXOffsetUsed = xOffset;
+
+		character.transform.position = new Vector2 (xOffset, 0f);
 	}
 }
