@@ -14,6 +14,7 @@ public class Character : CharacterContainer {
 
 	private bool isJump = false;
 	private bool isRanged = true;
+	public bool isMovable = false;
 	// More personalization e.g. skins etc.
 	// ...
 
@@ -25,6 +26,21 @@ public class Character : CharacterContainer {
 	}
 
 	void Update()
+	{
+		if (isMovable)
+		{
+			HandleMovement();
+		}
+	}
+
+	public Character (uint id, uint scalarSpeed, uint jumpHeight)
+	{
+		this.id = id;
+		this.scalarSpeed = scalarSpeed;
+		this.jumpHeight = jumpHeight;
+	}
+
+	private void HandleMovement ()
 	{
 		//control movement
 		if(Input.GetKeyDown(KeyCode.UpArrow) && !isJump)
@@ -41,13 +57,6 @@ public class Character : CharacterContainer {
 		{
 			Move("Right");
 		}	
-	}
-
-	public Character (uint id, uint scalarSpeed, uint jumpHeight)
-	{
-		this.id = id;
-		this.scalarSpeed = scalarSpeed;
-		this.jumpHeight = jumpHeight;
 	}
 
 	// State

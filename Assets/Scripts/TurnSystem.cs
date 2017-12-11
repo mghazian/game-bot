@@ -107,13 +107,49 @@ public class TurnSystem
 		return turnOrder[currentOrder];
 	}
 
+	/**
+	 * @brief Starts the current player's turn i.e. enable the player to act
+	 * @return void
+	 */
 	public void BeginTurn ()
 	{
+		if (turnOrder.Count == 0)
+		{
+			Debug.LogWarning ("Unable to begin player's turn: no player is present");
+			return;
+		}
 
+		Character currentPlayer = turnOrder[currentOrder].GetComponent<Character>();
+		if ( currentPlayer == null )
+		{
+			Debug.LogWarning ("Unable to begin player's turn: the player doesn't have Character script attached");
+			return;
+		}
+
+		currentPlayer.isMovable = true;
+		// Start the timer
 	}
 
+	/**
+	 * @brief Ends the current player's turn i.e. stops the player from acting
+	 * @return void
+	 */
 	public void EndTurn ()
 	{
+		if (turnOrder.Count == 0)
+		{
+			Debug.LogWarning ("Unable to end player's turn: no player is present");
+			return;
+		}
 
+		Character currentPlayer = turnOrder[currentOrder].GetComponent<Character>();
+		if ( currentPlayer == null )
+		{
+			Debug.LogWarning ("Unable to end player's turn: the player doesn't have Character script attached");
+			return;
+		}
+
+		currentPlayer.isMovable = false;
+		// Dispose the timer
 	}
 }

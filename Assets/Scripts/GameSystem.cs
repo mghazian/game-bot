@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameSystem : MonoBehaviour
 {
-
 	private List <GameObject> characters;
 	private SpawnSystem spawnController;
 	private TurnSystem turnController;
@@ -13,11 +12,11 @@ public class GameSystem : MonoBehaviour
 
 	public GameObject playerPrefab;
 
-	private void Start(){
+	private void Start()
+	{
 		characters = new List <GameObject> ();
 		map = GameObject.Find ("ground");
 		//generatePlayers ();
-		turnController = new TurnSystem(2);
 		spawnController = new SpawnSystem();
 	}
 
@@ -36,11 +35,18 @@ public class GameSystem : MonoBehaviour
 			playerMove();
 			Debug.Log ("Game started");
 			//player1Turn = turnController.changeTurn;
-			generatePlayers(5);
-			turnController.playerNumber = 5;
+			generatePlayers(3);
+			turnController = new TurnSystem (characters);
 			turnController.GenerateTurnOrder();
+			turnController.BeginTurn();
 		}
 
+		if (Input.GetKeyDown (KeyCode.A))
+		{
+			turnController.EndTurn();
+			turnController.NextTurn();
+			turnController.BeginTurn();
+		}
 	}
 
 	private void generatePlayers (int playerNumber)
