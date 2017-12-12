@@ -12,6 +12,7 @@ public class Character : CharacterContainer {
 
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
+	private SpriteRenderer spriteRenderer;
 
 	private bool isJump = false;
 	private bool isRanged = true;
@@ -25,6 +26,7 @@ public class Character : CharacterContainer {
 	{
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
 		anim = this.gameObject.GetComponent<Animator> ();
+		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer> ();
 	}
 
 	void Update()
@@ -61,17 +63,20 @@ public class Character : CharacterContainer {
 		}	
 	}
 
-	// State
-
 	private void Move(string direction)
 	{
+		anim.SetTrigger ("Move");
+
 		if (direction == "Left") 
 		{
+			spriteRenderer.flipX = true;
 			playerRigidBody2D.velocity = new Vector3 (-3.0f , playerRigidBody2D.velocity.y, 0.0f);
+
 		} 
 
 		else 
 		{
+			spriteRenderer.flipX = false;
 			playerRigidBody2D.velocity = new Vector3 (3.0f, playerRigidBody2D.velocity.y, 0.0f);
 
 		}
@@ -79,7 +84,7 @@ public class Character : CharacterContainer {
 
 	private void Jump()
 	{
-		
+		anim.SetTrigger ("Jump");
 		isJump = true;
 		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, 8f,0.0f);
 	}
