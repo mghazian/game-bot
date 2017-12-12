@@ -11,6 +11,7 @@ public class Character : CharacterContainer {
 	private uint jumpHeight { get; set; }
 
 	private Rigidbody2D playerRigidBody2D;
+	private Animator anim;
 
 	private bool isJump = false;
 	private bool isRanged = true;
@@ -23,6 +24,7 @@ public class Character : CharacterContainer {
 	void Start()
 	{
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
+		anim = this.gameObject.GetComponent<Animator> ();
 	}
 
 	void Update()
@@ -77,6 +79,7 @@ public class Character : CharacterContainer {
 
 	private void Jump()
 	{
+		
 		isJump = true;
 		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, 8f,0.0f);
 	}
