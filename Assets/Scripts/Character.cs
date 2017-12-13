@@ -16,12 +16,10 @@ public class Character : CharacterContainer {
 
 	private bool isJump = false;
 	private bool isRanged = true;
-	public bool isMovable = false;
-	// More personalization e.g. skins etc.
-	// ...
+	public bool isMovable = true;
+	private bool isMoving = false;
 
-	// Weapons
-	// ...
+
 	void Start()
 	{
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
@@ -46,9 +44,10 @@ public class Character : CharacterContainer {
 
 	private void HandleMovement ()
 	{
-		//control movement
+		
 		if(Input.GetKeyDown(KeyCode.UpArrow) && !isJump)
 		{
+			anim.SetTrigger ("Jump");
 			Jump ();
 		}
 
@@ -60,12 +59,22 @@ public class Character : CharacterContainer {
 		if(Input.GetKey(KeyCode.RightArrow))
 		{
 			Move("Right");
-		}	
+		}
+
+		if (Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) 
+		{
+			Stop ();
+		}
 	}
 
 	private void Move(string direction)
 	{
-		anim.SetTrigger ("Move");
+		if (!isMoving) 
+		{
+			anim.SetTrigger ("Move");
+		}
+
+		isMoving = true;
 
 		if (direction == "Left") 
 		{
@@ -82,9 +91,14 @@ public class Character : CharacterContainer {
 		}
 	}
 
+	private void Stop(){
+		isMoving = false;
+		anim.SetTrigger ("Stop");
+	}
+
 	private void Jump()
 	{
-		anim.SetTrigger ("Jump");
+		//anim.SetTrigger ("Jump");
 		isJump = true;
 		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, 8f,0.0f);
 	}
@@ -102,6 +116,7 @@ public class Character : CharacterContainer {
 	void OnCollisionStay2D (Collision2D anotherObject)
 	{
 		if (anotherObject.collider.tag == "Ground") {
+			
 			isJump = false;
 		}
 	}
