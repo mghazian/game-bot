@@ -7,9 +7,19 @@ public class TimerSystem : MonoBehaviour {
 
 	public Text timerText;
 	private float startTime;
+    private float timeToCount;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    TimerSystem(float time) {
+        timeToCount = time;
+    }
+
+    private void printTimerText(string textToWrite)
+    {
+        timerText.text = textToWrite;
+    }
+
+    void Start () {
 		startTime = Time.time;
 	}
 	
@@ -17,7 +27,18 @@ public class TimerSystem : MonoBehaviour {
 	void Update () {
 		float timeLength = Time.time - startTime;
 
-		string seconds = timeLength.ToString ("f0");
-		timerText.text = seconds;
+        //string seconds = timeLength.ToString ("f0");
+        string timeLeft = (timeToCount - timeLength).ToString("f0");
+        printTimerText(timeLeft);
 	}
+
+    // Print end of turn
+    void Stop() {
+        printTimerText("End Turn");
+    }
+
+    //To Stop Timer while still counting
+    public void endTimer() {
+        Stop();
+    }
 }
