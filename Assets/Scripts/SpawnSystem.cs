@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnSystem : MonoBehaviour {
+public class SpawnSystem
+{
+	private List <float> possibleOffset = new List<float> (new float[]{-10.0f, -5.0f, 0f, 5.0f, 10.0f});
+	private float lastXOffsetUsed = float.NaN;
+		
+	public void SpawnPlayer (GameObject character, float xOffset = float.NaN)
+	{
+		if ( float.IsNaN (xOffset) )
+		{
+			do
+			{
+				xOffset = possibleOffset[Random.Range (0, possibleOffset.Count)];
+			} while (xOffset == lastXOffsetUsed);
+		}
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		lastXOffsetUsed = xOffset;
+
+		character.transform.position = new Vector2 (xOffset, 0f);
 	}
 }
