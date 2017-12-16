@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelection : MonoBehaviour {
 
 	private GameObject[] characterList;
+	private int index;
 
 	void Start () {
+		index = PlayerPrefs.GetInt("CharacterSelected");
 		characterList = new GameObject[transform.childCount];
 
-		for(int i = 0; transform.childCount; i++){
+		for(int i = 0; i < transform.childCount; i++){
 			characterList [i] = transform.GetChild (i).gameObject;
 		}
 
@@ -17,12 +20,35 @@ public class CharacterSelection : MonoBehaviour {
 			go.SetActive (false);
 		}
 
-		if (characterList [0]) {
-			characterList [0].SetActive (true);
+		if (characterList [index]) {
+			characterList [index].SetActive (true);
 		}
 	}
 
-	void Update () {
-		
+	public void toggleLeft(){
+		characterList [index].SetActive (false);
+
+		index = index - 1;
+		if (index < 0) {
+			index = characterList.Length - 1;
+		}
+
+		characterList [index].SetActive (true); 
+	}
+
+	public void toggleRight(){
+		characterList [index].SetActive (false);
+
+		index = index + 1;
+		if (index == characterList.Length) {
+			index = 0;
+		}
+
+		characterList [index].SetActive (true); 
+	}
+
+	public void selectButton(){
+		PlayerPrefs.SetInt ("CharacterSelected", index);
+		SceneManager.LoadScene ("Main Game");
 	}
 }
