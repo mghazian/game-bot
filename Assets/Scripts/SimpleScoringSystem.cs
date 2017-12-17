@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleScoringSystem : MonoBehaviour {
 
-    private List<CharacterScore> characterScores;
+    protected List<CharacterScore> characterScores;
 
 	// Use this for initialization
 	void Start () {
