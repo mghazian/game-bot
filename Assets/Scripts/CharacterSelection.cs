@@ -26,6 +26,12 @@ public class CharacterSelection : MonoBehaviour {
 	}
 
 	public void toggleLeft(){
+		if (index > 0) {
+			characterList [index].SetActive (false);
+			index = index - 1;
+			characterList [index].SetActive (true); 
+		}
+		/*
 		characterList [index].SetActive (false);
 
 		index = index - 1;
@@ -34,9 +40,16 @@ public class CharacterSelection : MonoBehaviour {
 		}
 
 		characterList [index].SetActive (true); 
+		*/
 	}
 
 	public void toggleRight(){
+		if (index < characterList.Length - 1) {
+			characterList [index].SetActive (false);
+			index = index + 1;
+			characterList [index].SetActive (true); 
+		}
+		/*
 		characterList [index].SetActive (false);
 
 		index = index + 1;
@@ -45,6 +58,7 @@ public class CharacterSelection : MonoBehaviour {
 		}
 
 		characterList [index].SetActive (true); 
+		*/
 	}
 
 	public void selectButton(){
