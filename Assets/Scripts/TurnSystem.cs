@@ -17,7 +17,8 @@ public class TurnSystem
 	{
 		initializeTurnOrder (player);
 		GenerateTurnOrder ();
-        timer = new TimerSystem(this);
+        timer = new TimerSystem();
+        timer.setTurnSystem(this);
 	}
 
 	/**

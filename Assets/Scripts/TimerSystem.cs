@@ -3,18 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerSystem {
+public class TimerSystem : MonoBehaviour {
 
 	public Text timerText;
 	private float startTime;
     private float timeToCount;
+    private bool isTimer;
 
     private TurnSystem turnSystem;
 
     // Use this for initialization
-    public TimerSystem(TurnSystem system) {
+    void Start()
+    {
+        isTimer = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float startTime = Time.time;
+        float timeLength = Time.time - startTime;
+
+        if (isTimer)
+        {
+            if((timeToCount - timeLength)>0)
+            {
+                string timeLeft = (timeToCount - timeLength).ToString("f0");
+                printTimerText(timeLeft);
+            }
+            else
+            {
+                end();
+            }
+        }
+    }
+
+
+    public void setTurnSystem(TurnSystem system) {
         turnSystem = system;
-        timeToCount = 0;
     }
 
     private void printTimerText(string textToWrite)
@@ -25,21 +51,13 @@ public class TimerSystem {
     public void begin(float time)
     {
         timeToCount += time;
-        float startTime = Time.time;
-        float timeLength = Time.time - startTime;
-        
-        while((timeToCount - timeLength)>0)
-        {
-            string timeLeft = (timeToCount - timeLength).ToString("f0");
-            printTimerText(timeLeft);
-        }
-        
-        end();
+        isTimer = true;
     }
 
     public void end()
     {
         timeToCount = 0;
+        isTimer = false;
         turnSystem.EndTurn();
     }
 }
