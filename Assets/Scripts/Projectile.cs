@@ -16,8 +16,11 @@ public class Projectile : MonoBehaviour {
 		
 	}
 
-	void onCollisionEnter2D (Collision2D other)
+	void OnCollisionEnter2D (Collision2D other)
 	{
-		
+		Debug.Log ("PROJECTILE COLLIDED");
+		if (other.gameObject.tag == "Player")
+			other.gameObject.GetComponent<Character>().UpdateHealth (-damage);
+		Destroy (gameObject);
 	}
 }

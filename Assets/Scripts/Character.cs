@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Character : CharacterContainer {
 
+	private int health;
+
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
 	private SpriteRenderer spriteRenderer;
+
+	public OnDamaged OnDamaged;
 
 	public bool isMovable = false;
 	public bool isAttackable = false;
@@ -21,10 +25,12 @@ public class Character : CharacterContainer {
 
 	void Start()
 	{
+		health = 100;
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
 		anim = this.gameObject.GetComponent<Animator> ();
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer> ();
 		rangedWeapon = gameObject.AddComponent<RangedWeapon> ();
+		OnDamaged = new OnDamaged();
 	}
 
 	void Update()
@@ -146,5 +152,13 @@ public class Character : CharacterContainer {
 		if (anotherObject.collider.tag == "Ground") {
 			isJump = false;
 		}
+	}
+
+	public void UpdateHealth (int health)
+	{
+		this.health += health;
+		Debug.Log ("HEALTH: " + this.health);
+
+		OnDamaged.Invoke (health);
 	}
 }
