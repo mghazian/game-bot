@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Weapon
+public abstract class Weapon : MonoBehaviour
 {
 	protected uint damage;
 
@@ -10,6 +10,6 @@ public abstract class Weapon
 		this.damage = damage;
 	}
 
-	public abstract void fire ();
+	public abstract void Fire ();
 }
 
