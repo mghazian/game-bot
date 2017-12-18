@@ -10,6 +10,7 @@ Pemain pertama bisa bergerak ke kanan ke kiri atau bahkan melompat untuk menaiki
 Bagaimana? Mudah dan seru kan? Ditambah lagi dengan karakter yang lucu - lucu maka permainan ini menjadi tidak membosankan ^^
 
 Selamat bermain! Aim, Fire!
-![alt text](https://github.com/mghazian/game-bot/blob/development/Assets/Resources/Powered_by_Unity_logo.png) 
+
+(https://github.com/mghazian/game-bot/blob/development/Assets/Resources/Powered_by_Unity_logo.png) 
 
 
