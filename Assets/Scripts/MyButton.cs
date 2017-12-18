@@ -4,27 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MyButton : Button {
-
-
+public class MyButton : MonoBehaviour {
+    protected Button parent;
     protected IClickable iclickable;
 
-    public MyButton()
+    protected void Initialize()
     {
-        this.onClick.AddListener(Down);
+        parent = this.gameObject.GetComponent<Button>();
+        parent.onClick.AddListener(Down);
     }
+
     public void Down()
     {
         iclickable.Down();
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
