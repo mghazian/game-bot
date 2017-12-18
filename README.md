@@ -3,8 +3,8 @@
 Game-bot merupakan sebuah game *artilery tactical video game*. Sebuah game yang bergantung akan presisi dan strategi pemain dalam memilih senjata yang digunakan untuk memenangkan permainan. 
 
 ## Fitur
-..* Character select
-..* Variasi senjata jarak dekat maupun jarak jauh
+* Character select
+* Variasi senjata jarak dekat maupun jarak jauh
 
 ## How to play?
 
