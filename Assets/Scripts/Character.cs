@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Character : CharacterContainer {
 
-	private uint id { get; }
-	private uint health { get; set; }
+	//private uint id { get; }
+	//private uint health { get; set; }
 
-	private uint scalarSpeed { get; set; }
-	private uint jumpHeight { get; set; }
+	//private uint scalarSpeed { get; set; }
+	//private uint jumpHeight { get; set; }
 
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
 	private SpriteRenderer spriteRenderer;
 
+	public bool isMovable = true;
 	private bool isJump = false;
 	private bool isRanged = true;
-	public bool isMovable = true;
 	private bool isMoving = false;
 
 
@@ -35,12 +35,12 @@ public class Character : CharacterContainer {
 		}
 	}
 
-	public Character (uint id, uint scalarSpeed, uint jumpHeight)
-	{
-		this.id = id;
-		this.scalarSpeed = scalarSpeed;
-		this.jumpHeight = jumpHeight;
-	}
+	//public Character (uint id, uint scalarSpeed, uint jumpHeight)
+	//{
+	//	this.id = id;
+	//	this.scalarSpeed = scalarSpeed;
+	//	this.jumpHeight = jumpHeight;
+	//}
 
 	private void HandleMovement ()
 	{
