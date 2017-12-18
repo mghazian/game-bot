@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerSystem : MonoBehaviour {
+public class TimerSystem {
 
 	public Text timerText;
 	private float startTime;
     private float timeToCount;
 
+    private TurnSystem turnSystem;
+
     // Use this for initialization
-    TimerSystem(float time) {
-        timeToCount = time;
+    public TimerSystem(TurnSystem system) {
+        turnSystem = system;
+        timeToCount = 0;
     }
 
     private void printTimerText(string textToWrite)
@@ -19,26 +22,24 @@ public class TimerSystem : MonoBehaviour {
         timerText.text = textToWrite;
     }
 
-    void Start () {
-		startTime = Time.time;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		float timeLength = Time.time - startTime;
-
-        //string seconds = timeLength.ToString ("f0");
-        string timeLeft = (timeToCount - timeLength).ToString("f0");
-        printTimerText(timeLeft);
-	}
-
-    // Print end of turn
-    void Stop() {
-        printTimerText("End Turn");
+    public void begin(float time)
+    {
+        timeToCount += time;
+        float startTime = Time.time;
+        float timeLength = Time.time - startTime;
+        
+        while((timeToCount - timeLength)>0)
+        {
+            string timeLeft = (timeToCount - timeLength).ToString("f0");
+            printTimerText(timeLeft);
+        }
+        
+        end();
     }
 
-    //To Stop Timer while still counting
-    public void endTimer() {
-        Stop();
+    public void end()
+    {
+        timeToCount = 0;
+        turnSystem.EndTurn();
     }
 }

@@ -11,10 +11,13 @@ public class TurnSystem
 	private Dictionary <int, GameObject> turnOrder;
 	private int currentOrder;
 
+    private TimerSystem timer;
+
 	public TurnSystem (List <GameObject> player)
 	{
 		initializeTurnOrder (player);
 		GenerateTurnOrder ();
+        timer = new TimerSystem(this);
 	}
 
 	/**
@@ -127,7 +130,11 @@ public class TurnSystem
 		}
 
 		currentPlayer.isMovable = true;
-		// Start the timer
+        // Start the timer
+
+        float timeToCount = 5;
+
+        timer.begin(timeToCount);
 	}
 
 	/**
