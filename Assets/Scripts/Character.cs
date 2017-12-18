@@ -17,12 +17,14 @@ public class Character : CharacterContainer {
 	private float movementSpeed = 3.0f;
 	private float jumpStrength = 8.0f;
 
+	private RangedWeapon rangedWeapon;
 
 	void Start()
 	{
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
 		anim = this.gameObject.GetComponent<Animator> ();
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer> ();
+		rangedWeapon = gameObject.AddComponent<RangedWeapon> ();
 	}
 
 	void Update()
@@ -30,6 +32,7 @@ public class Character : CharacterContainer {
 		if (isMovable)
 		{
 			HandleMovement();
+			HandleAttack();
 		}
 	}
 
@@ -54,6 +57,42 @@ public class Character : CharacterContainer {
 		if ((Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) && !isJump) 
 		{
 			Stop ();
+		}
+	}
+
+	private void HandleAttack ()
+	{
+		if ( !isJump && !isMoving )
+		{
+			if (Input.GetKey (KeyCode.W))
+			{
+				Debug.Log (rangedWeapon.angle);
+				if (rangedWeapon.angle < 90)
+					rangedWeapon.angle += 0.4f;
+			}
+			else if (Input.GetKey (KeyCode.S))
+			{
+				Debug.Log (rangedWeapon.angle);
+				if (rangedWeapon.angle >= 0)
+					rangedWeapon.angle -= 0.4f;
+			}
+			else if (Input.GetKey (KeyCode.Space))
+			{
+				Debug.Log (rangedWeapon.power);
+				if (rangedWeapon.power <= 50)
+					rangedWeapon.power += 0.4f;
+				else
+				{
+					isMovable = false;
+					rangedWeapon.Fire();
+				}
+			}
+
+			else if (Input.GetKeyUp (KeyCode.Space))
+			{
+				isMovable = false;
+				rangedWeapon.Fire();
+			}
 		}
 	}
 
