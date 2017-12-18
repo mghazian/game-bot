@@ -10,9 +10,12 @@ public class Character : CharacterContainer {
 
 	public bool isMovable = false;
 	public bool isAttackable = false;
+
 	private bool isJump = false;
 	private bool isRanged = true;
 	private bool isMoving = false;
+
+	public int health = 10;
 
 	private float movementSpeed = 3.0f;
 	private float jumpStrength = 8.0f;
@@ -30,6 +33,11 @@ public class Character : CharacterContainer {
 		if (isMovable)
 		{
 			HandleMovement();
+		}
+
+		if (isAttackable)
+		{
+			HandleAttack();
 		}
 	}
 
@@ -53,6 +61,18 @@ public class Character : CharacterContainer {
 		if ((Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow))) 
 		{
 			Stop ();
+		}
+	}
+
+	private void HandleAttack()
+	{
+		if (isRanged) {
+		
+		} 
+
+		else 
+		{
+			
 		}
 	}
 
@@ -109,6 +129,11 @@ public class Character : CharacterContainer {
 		{
 			anim.ResetTrigger ("Stop");
 			isJump = false;
+		}
+
+		if (anotherObject.collider.name == "Bullet") 
+		{
+			
 		}
 	}
 }
