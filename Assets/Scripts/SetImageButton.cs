@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetCanvasButton : MyButton {
+public class SetImageButton : MyButton {
     [SerializeField]
     public Image activeImage;
     public string imagePath;
 
     // Use this for initialization
     void Start () {
-        iclickable = new SetCanvas(activeImage,imagePath);
+        iclickable = new SetImage(activeImage,imagePath);
         Initialize();
     }
 	

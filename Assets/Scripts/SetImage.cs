@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetCanvas : IClickable {
+public class SetImage : IClickable {
 
     private Image activeImage;
     private string imagePath;
 
-    public SetCanvas(Image active_image, string image_path)
+    public SetImage(Image active_image, string image_path)
     {
         activeImage = active_image;
         imagePath = image_path;
