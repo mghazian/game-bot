@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class Character : CharacterContainer {
 
-	//private uint id { get; }
-	//private uint health { get; set; }
-
-	//private uint scalarSpeed { get; set; }
-	//private uint jumpHeight { get; set; }
-
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
 	private SpriteRenderer spriteRenderer;
 
-	public bool isMovable = true;
+	public bool isMovable = false;
+	public bool isAttackable = false;
 	private bool isJump = false;
 	private bool isRanged = true;
 	private bool isMoving = false;
+
+	private float movementSpeed = 3.0f;
+	private float jumpStrength = 8.0f;
 
 
 	void Start()
@@ -35,19 +33,11 @@ public class Character : CharacterContainer {
 		}
 	}
 
-	//public Character (uint id, uint scalarSpeed, uint jumpHeight)
-	//{
-	//	this.id = id;
-	//	this.scalarSpeed = scalarSpeed;
-	//	this.jumpHeight = jumpHeight;
-	//}
-
 	private void HandleMovement ()
 	{
 		
 		if(Input.GetKeyDown(KeyCode.UpArrow) && !isJump)
 		{
-			anim.SetTrigger ("Jump");
 			Jump ();
 		}
 
@@ -61,7 +51,7 @@ public class Character : CharacterContainer {
 			Move("Right");
 		}
 
-		if (Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) 
+		if ((Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) && !isJump) 
 		{
 			Stop ();
 		}
@@ -79,14 +69,13 @@ public class Character : CharacterContainer {
 		if (direction == "Left") 
 		{
 			spriteRenderer.flipX = true;
-			playerRigidBody2D.velocity = new Vector3 (-3.0f , playerRigidBody2D.velocity.y, 0.0f);
-
+			playerRigidBody2D.velocity = new Vector3 (-movementSpeed , playerRigidBody2D.velocity.y, 0.0f);
 		} 
 
 		else 
 		{
 			spriteRenderer.flipX = false;
-			playerRigidBody2D.velocity = new Vector3 (3.0f, playerRigidBody2D.velocity.y, 0.0f);
+			playerRigidBody2D.velocity = new Vector3 (movementSpeed, playerRigidBody2D.velocity.y, 0.0f);
 
 		}
 	}
@@ -98,9 +87,9 @@ public class Character : CharacterContainer {
 
 	private void Jump()
 	{
-		//anim.SetTrigger ("Jump");
+		anim.SetTrigger ("Jump");
 		isJump = true;
-		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, 8f,0.0f);
+		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, jumpStrength, 0.0f);
 	}
 
 	private void Attack()
@@ -116,7 +105,6 @@ public class Character : CharacterContainer {
 	void OnCollisionStay2D (Collision2D anotherObject)
 	{
 		if (anotherObject.collider.tag == "Ground") {
-			
 			isJump = false;
 		}
 	}
