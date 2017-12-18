@@ -35,12 +35,6 @@ public class Character : CharacterContainer {
 
 	private void HandleMovement ()
 	{
-		
-		if(Input.GetKeyDown(KeyCode.UpArrow) && !isJump)
-		{
-			Jump ();
-		}
-
 		if(Input.GetKey(KeyCode.LeftArrow))
 		{
 			Move("Left");
@@ -51,7 +45,12 @@ public class Character : CharacterContainer {
 			Move("Right");
 		}
 
-		if ((Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) && !isJump) 
+		if(Input.GetKeyDown(KeyCode.UpArrow) && !isJump)
+		{
+			Jump ();
+		}
+			
+		if ((Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow))) 
 		{
 			Stop ();
 		}
@@ -80,15 +79,17 @@ public class Character : CharacterContainer {
 		}
 	}
 
-	private void Stop(){
+	private void Stop()
+	{
 		isMoving = false;
 		anim.SetTrigger ("Stop");
 	}
 
 	private void Jump()
 	{
-		anim.SetTrigger ("Jump");
 		isJump = true;
+		anim.ResetTrigger ("Stop");
+		anim.SetTrigger ("Jump");
 		playerRigidBody2D.velocity = new Vector3 (playerRigidBody2D.velocity.x, jumpStrength, 0.0f);
 	}
 
@@ -104,7 +105,9 @@ public class Character : CharacterContainer {
 
 	void OnCollisionStay2D (Collision2D anotherObject)
 	{
-		if (anotherObject.collider.tag == "Ground") {
+		if (anotherObject.collider.tag == "Ground") 
+		{
+			anim.ResetTrigger ("Stop");
 			isJump = false;
 		}
 	}
