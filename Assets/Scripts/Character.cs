@@ -10,6 +10,7 @@ public class Character : CharacterContainer {
 
 	public bool isMovable = false;
 	public bool isAttackable = false;
+	public bool isAlive = true;
 
 	private bool isJump = false;
 	private bool isRanged = true;
@@ -33,14 +34,23 @@ public class Character : CharacterContainer {
 
 	void Update()
 	{
-		if (isMovable)
-		{
-			HandleMovement();
-		}
+		if (isAlive) {
+		
+			if (health <= 0) {
+				isAlive = false;
+			}
 
-		if (isAttackable)
+			if (isMovable) {
+				HandleMovement ();
+			}	
+				
+			if (isAttackable) {
+				HandleAttack ();
+			}
+		} 
+		else 
 		{
-			HandleAttack();
+			//Respawn
 		}
 	}
 
@@ -138,12 +148,14 @@ public class Character : CharacterContainer {
 		{
 			anim.SetTrigger ("Hurt");
 			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackRangedDamage);
+			health -= attackRangedDamage;
 		}
 
 		if (anotherObject.collider.tag == "Player") 
 		{
 			anim.SetTrigger ("Hurt");
 			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackMeeleDamage);
+			health -= attackMeeleDamage;
 		}
 	}
 }
