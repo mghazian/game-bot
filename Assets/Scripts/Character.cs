@@ -15,7 +15,10 @@ public class Character : CharacterContainer {
 	private bool isRanged = true;
 	private bool isMoving = false;
 
-	public int health = 10;
+	public int health = 100;
+
+	private int attackMeeleDamage = 5;
+	private int attackRangedDamage = 10;
 
 	private float movementSpeed = 3.0f;
 	private float jumpStrength = 8.0f;
@@ -131,9 +134,16 @@ public class Character : CharacterContainer {
 			isJump = false;
 		}
 
-		if (anotherObject.collider.name == "Bullet") 
+		if (anotherObject.collider.tag == "Bullet") 
 		{
-			
+			anim.SetTrigger ("Hurt");
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackRangedDamage);
+		}
+
+		if (anotherObject.collider.tag == "Player") 
+		{
+			anim.SetTrigger ("Hurt");
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackMeeleDamage);
 		}
 	}
 }
