@@ -7,6 +7,7 @@ public class GameSystem : MonoBehaviour
 	private List <GameObject> characters;
 	private SpawnSystem spawnController;
 	private TurnSystem turnController;
+	private SimpleScoringSystem scoreController;
 
 	private GameObject map;
 
@@ -18,6 +19,8 @@ public class GameSystem : MonoBehaviour
 		map = GameObject.Find ("ground");
 		//generatePlayers ();
 		spawnController = new SpawnSystem();
+		scoreController = gameObject.AddComponent<SimpleScoringSystem>();
+		turnController = gameObject.AddComponent<TurnSystem>();
 	}
 
 	void Update(){
@@ -31,12 +34,11 @@ public class GameSystem : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
 			// check player, game will start when player press space
-			TimerSystem timerController; 
 			playerMove();
 			Debug.Log ("Game started");
 			//player1Turn = turnController.changeTurn;
-			generatePlayers(3);
-			turnController = new TurnSystem (characters);
+			generatePlayers(2);
+			turnController.Initialize (characters);
 			turnController.GenerateTurnOrder();
 			turnController.BeginTurn();
 		}
@@ -45,6 +47,11 @@ public class GameSystem : MonoBehaviour
 		{
 			turnController.EndTurn();
 			turnController.NextTurn();
+
+			var player = turnController.WhoIsActive();
+			if (player.GetComponent<Character>().isDead)
+				spawnController.SpawnPlayer (player);
+
 			turnController.BeginTurn();
 		}
 	}
@@ -60,8 +67,8 @@ public class GameSystem : MonoBehaviour
 		}
 	}
 
-	private void playerMove(){
+	private void playerMove()
+	{
 
 	}
-
 }

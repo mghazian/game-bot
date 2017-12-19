@@ -10,12 +10,14 @@ public class TimerSystem : MonoBehaviour {
     private float timeToCount;
     private bool isTimer;
 
+	public OnTimerExpired OnTimerExpired;
+
     private TurnSystem turnSystem;
 
-    // Use this for initialization
-    void Start()
+	public void Initialize()
     {
         isTimer = false;
+		OnTimerExpired = new OnTimerExpired();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class TimerSystem : MonoBehaviour {
             else
             {
                 end();
+				OnTimerExpired.Invoke();
             }
         }
     }
@@ -45,7 +48,7 @@ public class TimerSystem : MonoBehaviour {
 
     private void printTimerText(string textToWrite)
     {
-        timerText.text = textToWrite;
+        //timerText.text = textToWrite;
     }
 
     public void begin(float time)
@@ -58,6 +61,5 @@ public class TimerSystem : MonoBehaviour {
     {
         timeToCount = 0;
         isTimer = false;
-        turnSystem.EndTurn();
     }
 }

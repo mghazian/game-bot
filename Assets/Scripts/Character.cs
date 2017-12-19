@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : CharacterContainer {
-
-	private int health;
-
+	
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
 	private SpriteRenderer spriteRenderer;
 
 	public OnDamaged OnDamaged;
+	public OnDead OnDead;
+	public OnAttacked OnAttacked;
 
 	public bool isMovable = false;
 	public bool isAttackable = false;
-	public bool isAlive = true;
+	public bool isDead = false;
 
 	private bool isJump = false;
 	private bool isRanged = true;
@@ -37,15 +37,18 @@ public class Character : CharacterContainer {
 		anim = this.gameObject.GetComponent<Animator> ();
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer> ();
 		rangedWeapon = gameObject.AddComponent<RangedWeapon> ();
+
 		OnDamaged = new OnDamaged();
+		OnDead = new OnDead();
+		OnAttacked = new OnAttacked();
 	}
 
 	void Update()
 	{
-		if (isAlive) {
+		if ( !isDead ) {
 		
 			if (health <= 0) {
-				isAlive = false;
+				isDead = true;
 			}
 
 			if (isMovable) {
@@ -104,15 +107,15 @@ public class Character : CharacterContainer {
 					rangedWeapon.power += 0.4f;
 				else
 				{
-					isMovable = false;
 					rangedWeapon.Fire();
+					OnAttacked.Invoke();
 				}
 			}
 
 			else if (Input.GetKeyUp (KeyCode.Space))
 			{
-				isMovable = false;
 				rangedWeapon.Fire();
+				OnAttacked.Invoke();
 			}
 		}
 	}
@@ -193,5 +196,8 @@ public class Character : CharacterContainer {
 		Debug.Log ("HEALTH: " + this.health);
 
 		OnDamaged.Invoke (health);
+
+		if (this.health <= 0)
+			OnDead.Invoke(this);
 	}
 }

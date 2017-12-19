@@ -12,7 +12,7 @@ public class RangedWeapon : Weapon
 
 	void Start ()
 	{
-		damage = 10;
+		damage = 100;
 		if (resourcePath != null)
 		{
 			projectilePrefab = Resources.Load (resourcePath) as GameObject;
