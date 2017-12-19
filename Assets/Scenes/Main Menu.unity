@@ -162,7 +162,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 619eec84d35e7b0478a76af4511aa345, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9d6c1a3418cfcf4f8a7fcbfa2158fc3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 1.8
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1045707196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9662d7ae3e796740b7a23b82db0d8c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e8c8857418d933f43a0cb5e7dd684642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Character Selection
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1651951738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9662d7ae3e796740b7a23b82db0d8c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e8c8857418d933f43a0cb5e7dd684642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Help
@@ -611,7 +611,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 28afe658278b77440a164d74ba32c0ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8628eb8c2b086d34a8a72dcb26179b39, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -716,8 +716,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 811, y: 287}
+  m_AnchoredPosition: {x: 0, y: -0.000015259}
+  m_SizeDelta: {x: 811, y: 352}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668870048
 MonoBehaviour:
@@ -738,7 +738,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a3f5958a360bf8746bc4c1150d255a22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9af1b8593c0adca46870544605fe9e11, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1782408407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d995e753f915146ba737e6ad759f02, type: 3}
+  m_Script: {fileID: 11500000, guid: d8202774f0889a84399b6884a8fe2d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1782408409
