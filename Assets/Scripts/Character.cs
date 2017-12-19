@@ -3,42 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : CharacterContainer {
-
-	private int health;
-
+	
 	private Rigidbody2D playerRigidBody2D;
 	private Animator anim;
 	private SpriteRenderer spriteRenderer;
 
 	public OnDamaged OnDamaged;
+	public OnDead OnDead;
+	public OnAttacked OnAttacked;
 
 	public bool isMovable = false;
 	public bool isAttackable = false;
+	public bool isDead = false;
+
 	private bool isJump = false;
 	private bool isRanged = true;
 	private bool isMoving = false;
+
+	public int health = 100;
 
 	private float movementSpeed = 3.0f;
 	private float jumpStrength = 8.0f;
 
 	private RangedWeapon rangedWeapon;
 
-	void Start()
+	public void Initialize()
 	{
 		health = 100;
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
 		anim = this.gameObject.GetComponent<Animator> ();
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer> ();
 		rangedWeapon = gameObject.AddComponent<RangedWeapon> ();
+
 		OnDamaged = new OnDamaged();
+		OnDead = new OnDead();
+		OnAttacked = new OnAttacked();
+
+		OnDamaged.AddListener (DebugHealth);
 	}
 
 	void Update()
 	{
-		if (isMovable)
-		{
-			HandleMovement();
-			HandleAttack();
+		if ( !isDead ) {
+		
+			if (health <= 0) {
+				isDead = true;
+			}
+
+			if (isMovable) {
+				HandleMovement ();
+			}	
+				
+			if (isAttackable) {
+				HandleAttack ();
+			}
 		}
 	}
 
@@ -88,15 +106,15 @@ public class Character : CharacterContainer {
 					rangedWeapon.power += 0.4f;
 				else
 				{
-					isMovable = false;
 					rangedWeapon.Fire();
+					OnAttacked.Invoke();
 				}
 			}
 
 			else if (Input.GetKeyUp (KeyCode.Space))
 			{
-				isMovable = false;
 				rangedWeapon.Fire();
+				OnAttacked.Invoke();
 			}
 		}
 	}
@@ -155,13 +173,35 @@ public class Character : CharacterContainer {
 			anim.ResetTrigger ("Stop");
 			isJump = false;
 		}
+
+		if (anotherObject.collider.tag == "Bullet") 
+		{
+			anim.SetTrigger ("Hurt");
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - rangedWeapon.damage);
+			UpdateHealth (-rangedWeapon.damage);
+		}
+
+		if (anotherObject.collider.tag == "Player") 
+		{
+			//	TODO: Get to melee instead of ranged weapon
+			anim.SetTrigger ("Hurt");
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - rangedWeapon.damage);
+			UpdateHealth (-rangedWeapon.damage);
+		}
+	}
+
+	private void DebugHealth (int health)
+	{
+		Debug.Log ("Health changed by " + health + " (to " + this.health + ")");
 	}
 
 	public void UpdateHealth (int health)
 	{
 		this.health += health;
-		Debug.Log ("HEALTH: " + this.health);
 
 		OnDamaged.Invoke (health);
+
+		if (this.health <= 0)
+			OnDead.Invoke(this);
 	}
 }

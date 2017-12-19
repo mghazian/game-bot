@@ -6,6 +6,11 @@ public class SimpleScoringSystem : MonoBehaviour {
 
     protected List<CharacterScore> characterScores;
 
+	public void Initialize ()
+	{
+		characterScores = new List<CharacterScore>();
+	}
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,12 +21,24 @@ public class SimpleScoringSystem : MonoBehaviour {
 		
 	}
 
+	private void ScoreDebug (Character scoringCharacter)
+	{
+		Debug.Log (scoringCharacter + " SCORED [Score " + getPlayerScore (scoringCharacter) + "]");
+	}
+
     // Add new character Score of a certain Character
     public void addCharacter(Character objectPointer)
     {
+		objectPointer.OnDead.AddListener(CharacterDeadScoreHandler);
+		objectPointer.OnDead.AddListener(ScoreDebug);
         CharacterScore newCharacterScore = new CharacterScore(objectPointer);
         characterScores.Add(newCharacterScore);
     }
+
+	private void CharacterDeadScoreHandler (Character objectPointer)
+	{
+		addScoreToPlayer (objectPointer, 1);
+	}
 
     // add score to a certain character in characterscores list 
     public void addScoreToPlayer(Character objectPointer, int point)

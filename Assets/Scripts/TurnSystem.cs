@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnSystem
+public class TurnSystem : MonoBehaviour
 {
 	private const int RandomizeStep = 20;
 	private const int UndefinedOrder = -1;
@@ -11,10 +11,17 @@ public class TurnSystem
 	private Dictionary <int, GameObject> turnOrder;
 	private int currentOrder;
 
-	public TurnSystem (List <GameObject> player)
+    private TimerSystem timer;
+
+	public void Initialize (List <GameObject> player)
 	{
 		initializeTurnOrder (player);
+		registerForEndOfTurn (player);
 		GenerateTurnOrder ();
+		timer = this.gameObject.AddComponent <TimerSystem>();
+		timer.Initialize();
+        timer.setTurnSystem(this);
+		timer.OnTimerExpired.AddListener (EndTurn);
 	}
 
 	/**
@@ -48,6 +55,14 @@ public class TurnSystem
 		for (int i = 0; i < player.Count; i++)
 		{
 			turnOrder.Add (i, player[i]);
+		}
+	}
+
+	private void registerForEndOfTurn (List <GameObject> player)
+	{
+		foreach (var p in player)
+		{
+			p.GetComponent <Character> ().OnAttacked.AddListener(EndTurn);
 		}
 	}
 
@@ -127,7 +142,11 @@ public class TurnSystem
 		}
 
 		currentPlayer.isMovable = true;
-		// Start the timer
+        // Start the timer
+
+        float timeToCount = 5;
+
+        timer.begin(timeToCount);
 	}
 
 	/**
@@ -150,6 +169,7 @@ public class TurnSystem
 		}
 
 		currentPlayer.isMovable = false;
+		currentPlayer.isAttackable = false;
 		// Dispose the timer
 	}
 }
