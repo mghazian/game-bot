@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 60430525087777950}
   m_Layer: 0
   m_Name: Character4
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,6 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   isAttackable: 0
+  isAlive: 1
+  health: 10
 --- !u!212 &212973184627824306
 SpriteRenderer:
   m_ObjectHideFlags: 1
