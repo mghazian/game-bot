@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeImage: {fileID: 2062717595}
-  imagePath: test2
+  imagePath: inf4
 --- !u!114 &216393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9ef542acf1b0ea94c97be206740d75bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2419bcaab32c2dd4a92869e77e05d958, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeImage: {fileID: 2062717595}
-  imagePath: test2
+  imagePath: inf2
 --- !u!114 &244568027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeImage: {fileID: 2062717595}
-  imagePath: test2
+  imagePath: inf5
 --- !u!114 &931818665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeImage: {fileID: 2062717595}
-  imagePath: test2
+  imagePath: inf3
 --- !u!114 &1686685324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,7 +1742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeImage: {fileID: 2062717595}
-  imagePath: test1
+  imagePath: inf1
 --- !u!114 &1955429633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1828,7 +1828,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.9, y: -4.8}
-  m_SizeDelta: {x: 734, y: 247}
+  m_SizeDelta: {x: 750, y: 247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062717595
 MonoBehaviour:
@@ -1842,14 +1842,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.992, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5dc7d0d4ff4351240b8e4ba59b5d4394, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
