@@ -3,12 +3,12 @@ using System.Collections;
 
 public class RangedWeapon : Weapon
 {
-	private string resourcePath = "Projectile";
+	private string resourcePath = "Bullet";
 	private float firingOffsetRadii = 2f; // TODO: Adjust accordingly
 	private GameObject projectilePrefab;
 	public float angle { get; set; }
 	public float power { get; set; }
-	private int damage;
+	public int damage { get; set; }
 
 	void Start ()
 	{

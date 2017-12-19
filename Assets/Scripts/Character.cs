@@ -22,15 +22,12 @@ public class Character : CharacterContainer {
 
 	public int health = 100;
 
-	private int attackMeeleDamage = 5;
-	private int attackRangedDamage = 10;
-
 	private float movementSpeed = 3.0f;
 	private float jumpStrength = 8.0f;
 
 	private RangedWeapon rangedWeapon;
 
-	void Start()
+	public void Initialize()
 	{
 		health = 100;
 		playerRigidBody2D = this.gameObject.GetComponent<Rigidbody2D> ();
@@ -41,6 +38,8 @@ public class Character : CharacterContainer {
 		OnDamaged = new OnDamaged();
 		OnDead = new OnDead();
 		OnAttacked = new OnAttacked();
+
+		OnDamaged.AddListener (DebugHealth);
 	}
 
 	void Update()
@@ -178,22 +177,27 @@ public class Character : CharacterContainer {
 		if (anotherObject.collider.tag == "Bullet") 
 		{
 			anim.SetTrigger ("Hurt");
-			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackRangedDamage);
-			health -= attackRangedDamage;
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - rangedWeapon.damage);
+			UpdateHealth (-rangedWeapon.damage);
 		}
 
 		if (anotherObject.collider.tag == "Player") 
 		{
+			//	TODO: Get to melee instead of ranged weapon
 			anim.SetTrigger ("Hurt");
-			anim.SetInteger ("Health", anim.GetInteger ("Health") - attackMeeleDamage);
-			health -= attackMeeleDamage;
+			anim.SetInteger ("Health", anim.GetInteger ("Health") - rangedWeapon.damage);
+			UpdateHealth (-rangedWeapon.damage);
 		}
+	}
+
+	private void DebugHealth (int health)
+	{
+		Debug.Log ("Health changed by " + health + " (to " + this.health + ")");
 	}
 
 	public void UpdateHealth (int health)
 	{
 		this.health += health;
-		Debug.Log ("HEALTH: " + this.health);
 
 		OnDamaged.Invoke (health);
 

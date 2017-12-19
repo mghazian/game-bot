@@ -20,6 +20,7 @@ public class GameSystem : MonoBehaviour
 		//generatePlayers ();
 		spawnController = new SpawnSystem();
 		scoreController = gameObject.AddComponent<SimpleScoringSystem>();
+		scoreController.Initialize();
 		turnController = gameObject.AddComponent<TurnSystem>();
 	}
 
@@ -31,7 +32,7 @@ public class GameSystem : MonoBehaviour
 			- Change turn
 			(Repeat process until somone dies)
 		*/
-		if (Input.GetKeyDown (KeyCode.Space))
+		if (Input.GetKeyDown (KeyCode.P))
 		{
 			// check player, game will start when player press space
 			playerMove();
@@ -61,8 +62,10 @@ public class GameSystem : MonoBehaviour
 		for (int i = 0; i < playerNumber; i++)
 		{
 			GameObject go = Instantiate (playerPrefab);
-			Debug.Log (i + " " + go);
+			go.GetComponent<Character>().Initialize();
+			Debug.Log (i + " " + go.GetComponent<Character>());
 			characters.Add (go);
+			scoreController.addCharacter (go.GetComponent<Character>());
 			spawnController.SpawnPlayer (go);
 		}
 	}

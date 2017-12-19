@@ -6,6 +6,11 @@ public class SimpleScoringSystem : MonoBehaviour {
 
     protected List<CharacterScore> characterScores;
 
+	public void Initialize ()
+	{
+		characterScores = new List<CharacterScore>();
+	}
+
 	// Use this for initialization
 	void Start () {
 		

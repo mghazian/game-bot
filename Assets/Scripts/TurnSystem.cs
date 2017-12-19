@@ -16,6 +16,7 @@ public class TurnSystem : MonoBehaviour
 	public void Initialize (List <GameObject> player)
 	{
 		initializeTurnOrder (player);
+		registerForEndOfTurn (player);
 		GenerateTurnOrder ();
 		timer = this.gameObject.AddComponent <TimerSystem>();
 		timer.Initialize();
@@ -168,6 +169,7 @@ public class TurnSystem : MonoBehaviour
 		}
 
 		currentPlayer.isMovable = false;
+		currentPlayer.isAttackable = false;
 		// Dispose the timer
 	}
 }
